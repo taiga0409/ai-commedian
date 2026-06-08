@@ -1,5 +1,7 @@
 import type { Idea } from "@/types/idea";
 
+
+
 export const mockIdeas: Idea[] = [
   {
     id: "1",
@@ -42,3 +44,7 @@ export const mockIdeas: Idea[] = [
     updatedAt: "2026-06-08T12:00:00.000Z",
   },
 ];
+
+export function getMockIdeaById(id: string): Idea | undefined {
+  return mockIdeas.find((idea) => idea.id === id);
+}
