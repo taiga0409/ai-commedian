@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getMockIdeaById } from "@/lib/mockIdeas";
+import type { Idea } from "@/types/idea";
 import { AiAnalysisPanel } from "@/components/AiAnalysisPanel";
+import { getIdeaById } from "@/lib/ideasRepository";
 import {
   AUDIENCE_SIZE_LABELS,
   AUDIENCE_TYPE_LABELS,
@@ -57,9 +58,11 @@ function TagList({ items }: TagListProps) {
   );
 }
 
+
+
 export default async function IdeaDetailPage({ params }: IdeaDetailPageProps) {
   const { id } = await params;
-  const idea = getMockIdeaById(id);
+  const idea = await getIdeaById(id);
 
   if (!idea) {
     notFound();
@@ -208,38 +211,7 @@ export default async function IdeaDetailPage({ params }: IdeaDetailPageProps) {
 
           <AiAnalysisPanel idea={idea} />
 
-          {/* <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h2 className="mb-4 text-sm font-bold text-gray-500">AI機能</h2>
-
-            <div className="grid gap-5">
-              <div>
-                <p className="mb-2 text-xs font-bold text-gray-500">
-                  AI生成オチ
-                </p>
-                <p className="whitespace-pre-wrap text-sm leading-6 text-gray-800">
-                  {idea.aiPunchline || "未入力"}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-bold text-gray-500">
-                  AIスコア
-                </p>
-                <p className="text-sm text-gray-800">
-                  {idea.aiScore !== undefined ? `${idea.aiScore}点` : "未入力"}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-bold text-gray-500">
-                  AIレビュー
-                </p>
-                <p className="whitespace-pre-wrap text-sm leading-6 text-gray-800">
-                  {idea.aiReview || "未入力"}
-                </p>
-              </div>
-            </div>
-          </section> */}
+          
         </div>
       </div>
     </main>

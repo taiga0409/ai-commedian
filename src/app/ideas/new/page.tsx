@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IdeaForm } from "@/components/IdeaForm";
+import { NewIdeaForm } from "@/components/NewIdeaForm";
 
 export default function NewIdeaPage() {
   return (
@@ -24,7 +24,7 @@ export default function NewIdeaPage() {
         </div>
 
         <section className="rounded-2xl bg-white p-6 shadow-sm">
-          <IdeaForm />
+            <NewIdeaForm />
         </section>
       </div>
     </main>

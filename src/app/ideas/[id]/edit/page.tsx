@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { IdeaForm } from "@/components/IdeaForm";
+import { EditIdeaForm } from "@/components/EditIdeaForm";
 import { getMockIdeaById } from "@/lib/mockIdeas";
 
 type EditIdeaPageProps = {
@@ -37,7 +37,7 @@ export default async function EditIdeaPage({ params }: EditIdeaPageProps) {
         </div>
 
         <section className="rounded-2xl bg-white p-6 shadow-sm">
-          <IdeaForm initialValues={idea} submitLabel="変更を保存" />
+          <EditIdeaForm idea={idea} />
         </section>
       </div>
     </main>

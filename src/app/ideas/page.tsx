@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { IdeaCard } from "@/components/IdeaCard";
-import { mockIdeas } from "@/lib/mockIdeas";
-import type { IdeaStatus, Scene, TalkLength } from "@/types/idea";
+import type { Idea, IdeaStatus, Scene, TalkLength } from "@/types/idea";
 import {
   IDEA_STATUS_LABELS,
   SCENE_LABELS,
@@ -33,6 +32,10 @@ const sceneOptions: Scene[] = [
 const talkLengthOptions: TalkLength[] = ["SHORT", "MEDIUM", "LONG"];
 
 export default function IdeasPage() {
+  const [ideas, setIdeas] = useState<Idea[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [selectedStatus, setSelectedStatus] = useState<IdeaStatus | "ALL">(
     "ALL"
   );
@@ -41,7 +44,32 @@ export default function IdeasPage() {
     TalkLength | "ALL"
   >("ALL");
 
-  const filteredIdeas = mockIdeas.filter((idea) => {
+  useEffect(() => {
+    async function fetchIdeas() {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const response = await fetch("/api/ideas");
+
+        if (!response.ok) {
+          throw new Error("ネタ一覧の取得に失敗しました。");
+        }
+
+        const data = (await response.json()) as Idea[];
+        setIdeas(data);
+      } catch (error) {
+        console.error(error);
+        setErrorMessage("ネタ一覧の取得に失敗しました。");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchIdeas();
+  }, []);
+
+  const filteredIdeas = ideas.filter((idea) => {
     const matchesStatus =
       selectedStatus === "ALL" || idea.status === selectedStatus;
 
@@ -169,11 +197,21 @@ export default function IdeasPage() {
           </div>
         </section>
 
+        {errorMessage && (
+          <div className="mb-4 rounded-2xl bg-red-50 p-4 text-sm font-semibold text-red-700">
+            {errorMessage}
+          </div>
+        )}
+
         <div className="mb-4 text-sm font-semibold text-gray-500">
-          {filteredIdeas.length}件のネタ
+          {isLoading ? "読み込み中..." : `${filteredIdeas.length}件のネタ`}
         </div>
 
-        {filteredIdeas.length > 0 ? (
+        {isLoading ? (
+          <div className="rounded-2xl bg-white p-8 text-center text-sm text-gray-500 shadow-sm">
+            ネタを読み込んでいます。
+          </div>
+        ) : filteredIdeas.length > 0 ? (
           <div className="grid gap-4">
             {filteredIdeas.map((idea) => (
               <IdeaCard key={idea.id} idea={idea} />
