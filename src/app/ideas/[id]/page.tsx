@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMockIdeaById } from "@/lib/mockIdeas";
+import { AiAnalysisPanel } from "@/components/AiAnalysisPanel";
 import {
   AUDIENCE_SIZE_LABELS,
   AUDIENCE_TYPE_LABELS,
@@ -205,7 +206,9 @@ export default async function IdeaDetailPage({ params }: IdeaDetailPageProps) {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <AiAnalysisPanel idea={idea} />
+
+          {/* <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <h2 className="mb-4 text-sm font-bold text-gray-500">AI機能</h2>
 
             <div className="grid gap-5">
@@ -236,7 +239,7 @@ export default async function IdeaDetailPage({ params }: IdeaDetailPageProps) {
                 </p>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
     </main>
