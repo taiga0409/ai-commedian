@@ -34,7 +34,7 @@ type SaveField =
   | "audienceTypes"
   | "audienceSize"
   | "audienceComedyLevel"
-  | "classificationReason"
+  | "classificationReason";
 
 const saveFieldLabels: Record<SaveField, string> = {
   category: "カテゴリー",
@@ -194,15 +194,6 @@ export function AiAnalysisPanel({ idea }: AiAnalysisPanelProps) {
       return;
     }
 
-    // const hasAcceptedField = Object.values(acceptedFields).some(Boolean);
-
-    // if (!hasAcceptedField) {
-    //   setErrorMessage("保存する項目を1つ以上採用してください。");
-    //   setSuccessMessage("");
-    //   return;
-    // }
-
-
     const payload: Partial<Idea> = {
         aiPunchline: editableAnalysis.aiPunchline,
         aiScore: editableAnalysis.aiScore,
@@ -305,9 +296,6 @@ export function AiAnalysisPanel({ idea }: AiAnalysisPanelProps) {
             <p className="text-3xl font-bold text-gray-900">
                 {editableAnalysis.aiScore}点
             </p>
-            {/* <p className="mt-2 text-xs font-semibold text-gray-400">
-                この項目は自動で保存されます。
-            </p> */}
           </div>
 
           <div>
@@ -315,9 +303,6 @@ export function AiAnalysisPanel({ idea }: AiAnalysisPanelProps) {
             <p className="whitespace-pre-wrap text-sm leading-6 text-gray-800">
                 {editableAnalysis.aiPunchline}
             </p>
-            {/* <p className="mt-2 text-xs font-semibold text-gray-400">
-                この項目は自動で保存されます。
-            </p> */}
           </div>
 
           <div>
@@ -325,9 +310,6 @@ export function AiAnalysisPanel({ idea }: AiAnalysisPanelProps) {
             <p className="whitespace-pre-wrap text-sm leading-6 text-gray-800">
                 {editableAnalysis.aiReview}
             </p>
-            {/* <p className="mt-2 text-xs font-semibold text-gray-400">
-                この項目は自動で保存されます。
-            </p> */}
           </div>
 
           <div>
