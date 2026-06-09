@@ -8,11 +8,26 @@
     "category": "日常",
     "status": "WAITING_PUNCHLINE",
     "note": "オチをもう少し短くしたい",
-    "tags": ["コンビニ", "袋", "店員", "気まずい"],
+    "tags": [
+      "コンビニ",
+      "袋",
+      "店員",
+      "気まずい"
+    ],
     "talkLength": "SHORT",
-    "moods": ["AWKWARD", "SELF_DEPRECATION"],
-    "suitableScenes": ["DRINKING_PARTY", "FRIENDS", "CASUAL_CHAT"],
-    "audienceTypes": ["CLOSE_FRIENDS", "ANYONE"],
+    "moods": [
+      "AWKWARD",
+      "SELF_DEPRECATION"
+    ],
+    "suitableScenes": [
+      "DRINKING_PARTY",
+      "FRIENDS",
+      "CASUAL_CHAT"
+    ],
+    "audienceTypes": [
+      "CLOSE_FRIENDS",
+      "ANYONE"
+    ],
     "audienceSize": "SMALL_GROUP",
     "audienceComedyLevel": "LOW",
     "createdAt": "2026-06-08T10:00:00.000Z",
@@ -27,11 +42,25 @@
     "category": "電車",
     "status": "STRUCTURING",
     "note": "",
-    "tags": ["電車", "席を譲る", "勘違い", "気まずい"],
+    "tags": [
+      "電車",
+      "席を譲る",
+      "勘違い",
+      "気まずい"
+    ],
     "talkLength": "SHORT",
-    "moods": ["AWKWARD", "RELATABLE"],
-    "suitableScenes": ["FRIENDS", "CASUAL_CHAT"],
-    "audienceTypes": ["CLOSE_FRIENDS", "ANYONE"],
+    "moods": [
+      "AWKWARD",
+      "RELATABLE"
+    ],
+    "suitableScenes": [
+      "FRIENDS",
+      "CASUAL_CHAT"
+    ],
+    "audienceTypes": [
+      "CLOSE_FRIENDS",
+      "ANYONE"
+    ],
     "audienceSize": "SMALL_GROUP",
     "audienceComedyLevel": "LOW",
     "createdAt": "2026-06-08T11:00:00.000Z",
@@ -46,14 +75,32 @@
     "category": "日常",
     "status": "MATERIAL",
     "note": "会話の気まずさを広げられそう",
-    "tags": ["美容室", "会話", "休日", "気まずい"],
+    "tags": [
+      "美容室",
+      "会話ミス",
+      "気まずい"
+    ],
     "talkLength": "SHORT",
-    "moods": ["AWKWARD", "RELATABLE"],
-    "suitableScenes": ["FRIENDS", "CASUAL_CHAT", "DRINKING_PARTY"],
-    "audienceTypes": ["CLOSE_FRIENDS", "ANYONE"],
+    "moods": [
+      "AWKWARD",
+      "RELATABLE"
+    ],
+    "suitableScenes": [
+      "FRIENDS",
+      "DRINKING_PARTY",
+      "CASUAL_CHAT"
+    ],
+    "audienceTypes": [
+      "CLOSE_FRIENDS",
+      "ANYONE"
+    ],
     "audienceSize": "SMALL_GROUP",
     "audienceComedyLevel": "LOW",
     "createdAt": "2026-06-08T12:00:00.000Z",
-    "updatedAt": "2026-06-08T12:00:00.000Z"
+    "updatedAt": "2026-06-09T21:40:03.689Z",
+    "classificationReason": "美容室でのちょっとした会話の失敗をテーマにしているため、日常の気まずい体験として分類。",
+    "aiPunchline": "仕事否定してるみたいで逆に気まずくなったよ",
+    "aiScore": 70,
+    "aiReview": "話の設定が共感しやすく良いが、オチがもっと意外性や具体的なエピソードで盛り上がるとより良くなる"
   }
 ]
