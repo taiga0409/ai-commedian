@@ -1,8 +1,65 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { IdeaCard } from "@/components/IdeaCard";
 import { mockIdeas } from "@/lib/mockIdeas";
+import type { IdeaStatus, Scene, TalkLength } from "@/types/idea";
+import {
+  IDEA_STATUS_LABELS,
+  SCENE_LABELS,
+  TALK_LENGTH_LABELS,
+} from "@/types/idea";
+
+const statusOptions: IdeaStatus[] = [
+  "MATERIAL",
+  "WAITING_PUNCHLINE",
+  "STRUCTURING",
+  "COMPLETED",
+  "REJECTED",
+];
+
+const sceneOptions: Scene[] = [
+  "DRINKING_PARTY",
+  "FRIENDS",
+  "WORK",
+  "FIRST_MEETING",
+  "DATE",
+  "SNS",
+  "STAGE",
+  "CASUAL_CHAT",
+];
+
+const talkLengthOptions: TalkLength[] = ["SHORT", "MEDIUM", "LONG"];
 
 export default function IdeasPage() {
+  const [selectedStatus, setSelectedStatus] = useState<IdeaStatus | "ALL">(
+    "ALL"
+  );
+  const [selectedScene, setSelectedScene] = useState<Scene | "ALL">("ALL");
+  const [selectedTalkLength, setSelectedTalkLength] = useState<
+    TalkLength | "ALL"
+  >("ALL");
+
+  const filteredIdeas = mockIdeas.filter((idea) => {
+    const matchesStatus =
+      selectedStatus === "ALL" || idea.status === selectedStatus;
+
+    const matchesScene =
+      selectedScene === "ALL" || idea.suitableScenes.includes(selectedScene);
+
+    const matchesTalkLength =
+      selectedTalkLength === "ALL" || idea.talkLength === selectedTalkLength;
+
+    return matchesStatus && matchesScene && matchesTalkLength;
+  });
+
+  function resetFilters() {
+    setSelectedStatus("ALL");
+    setSelectedScene("ALL");
+    setSelectedTalkLength("ALL");
+  }
+
   return (
     <main className="min-h-screen bg-gray-50 px-6 py-8">
       <div className="mx-auto max-w-4xl">
@@ -24,11 +81,109 @@ export default function IdeasPage() {
           </Link>
         </div>
 
-        <div className="grid gap-4">
-          {mockIdeas.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} />
-          ))}
+        <section className="mb-6 rounded-2xl bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <h2 className="text-sm font-bold text-gray-700">絞り込み</h2>
+
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="text-xs font-semibold text-gray-500 hover:text-gray-900"
+            >
+              リセット
+            </button>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-2">
+              <label
+                htmlFor="status"
+                className="text-xs font-bold text-gray-500"
+              >
+                ステータス
+              </label>
+              <select
+                id="status"
+                value={selectedStatus}
+                onChange={(event) =>
+                  setSelectedStatus(event.target.value as IdeaStatus | "ALL")
+                }
+                className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-900"
+              >
+                <option value="ALL">すべて</option>
+                {statusOptions.map((status) => (
+                  <option key={status} value={status}>
+                    {IDEA_STATUS_LABELS[status]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="grid gap-2">
+              <label
+                htmlFor="scene"
+                className="text-xs font-bold text-gray-500"
+              >
+                使える場面
+              </label>
+              <select
+                id="scene"
+                value={selectedScene}
+                onChange={(event) =>
+                  setSelectedScene(event.target.value as Scene | "ALL")
+                }
+                className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-900"
+              >
+                <option value="ALL">すべて</option>
+                {sceneOptions.map((scene) => (
+                  <option key={scene} value={scene}>
+                    {SCENE_LABELS[scene]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="grid gap-2">
+              <label
+                htmlFor="talkLength"
+                className="text-xs font-bold text-gray-500"
+              >
+                尺
+              </label>
+              <select
+                id="talkLength"
+                value={selectedTalkLength}
+                onChange={(event) =>
+                  setSelectedTalkLength(event.target.value as TalkLength | "ALL")
+                }
+                className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-900"
+              >
+                <option value="ALL">すべて</option>
+                {talkLengthOptions.map((talkLength) => (
+                  <option key={talkLength} value={talkLength}>
+                    {TALK_LENGTH_LABELS[talkLength]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <div className="mb-4 text-sm font-semibold text-gray-500">
+          {filteredIdeas.length}件のネタ
         </div>
+
+        {filteredIdeas.length > 0 ? (
+          <div className="grid gap-4">
+            {filteredIdeas.map((idea) => (
+              <IdeaCard key={idea.id} idea={idea} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl bg-white p-8 text-center text-sm text-gray-500 shadow-sm">
+            条件に合うネタがありません。
+          </div>
+        )}
       </div>
     </main>
   );
