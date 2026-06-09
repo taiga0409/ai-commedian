@@ -23,7 +23,7 @@ export function IdeaCard({ idea }: IdeaCardProps) {
       </div>
 
       <p className="mb-4 line-clamp-2 text-sm leading-6 text-gray-600">
-        {idea.episode}
+        {idea.episodeMain}
       </p>
 
       <div className="flex items-center justify-between text-xs text-gray-500">
