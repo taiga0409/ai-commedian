@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EditIdeaForm } from "@/components/EditIdeaForm";
-import { getMockIdeaById } from "@/lib/mockIdeas";
+import { getIdeaById } from "@/lib/ideasRepository";
 
 type EditIdeaPageProps = {
   params: Promise<{
@@ -11,7 +11,7 @@ type EditIdeaPageProps = {
 
 export default async function EditIdeaPage({ params }: EditIdeaPageProps) {
   const { id } = await params;
-  const idea = getMockIdeaById(id);
+  const idea = await getIdeaById(id);
 
   if (!idea) {
     notFound();

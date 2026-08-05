@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Idea } from "@/types/idea";
 import { AiAnalysisPanel } from "@/components/AiAnalysisPanel";
 import { getIdeaById } from "@/lib/ideasRepository";
 import {
